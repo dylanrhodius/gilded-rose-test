@@ -52,7 +52,14 @@ describe GildedRose do
         GildedRose.new(items).update_quality()
         expect(items[0].quality).to eq 1
       end
+    end
 
+    context 'Sulfuras, Hand of Ragnaros' do
+      it 'never decreases in quality' do
+        items = [Item.new("Sulfuras, Hand of Ragnaros", sell_in=0, quality=80)]
+        GildedRose.new(items).update_quality()
+        expect(items[0].quality).to eq 80
+      end
     end
 
   end
