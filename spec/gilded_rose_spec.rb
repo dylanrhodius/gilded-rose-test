@@ -34,8 +34,17 @@ describe GildedRose do
 
       it 'does not decrease the quality of an item below 0 (quality is never negative)' do
         items = [Item.new("Item", 2, 0)]
-          GildedRose.new(items).update_quality()
+        GildedRose.new(items).update_quality()
         expect(items[0].quality).to eq 0
+      end
+
+    end
+
+    context 'Aged Brie' do
+      it 'Aged brie\'s quality increases the older it gets' do
+        items = [Item.new("Aged Brie", 2, 0)]
+        GildedRose.new(items).update_quality()
+        expect(items[0].quality).to eq 1
       end
 
     end
