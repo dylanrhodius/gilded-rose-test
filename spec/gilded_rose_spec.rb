@@ -65,5 +65,31 @@ describe GildedRose do
       end
     end
 
+    context 'Backstage passes to a TAFKAL80ETC concert' do
+      it 'increases in quality as sellin approaches: regular' do
+        items = [Item.new("Backstage passes to a TAFKAL80ETC concert", sell_in=20, quality=20)]
+        GildedRose.new(items).update_quality()
+        expect(items[0].quality).to eq 21
+      end
+
+      it 'increases in quality as sellin approaches: 10 or less days' do
+        items = [Item.new("Backstage passes to a TAFKAL80ETC concert", sell_in=10, quality=20)]
+        GildedRose.new(items).update_quality()
+        expect(items[0].quality).to eq 22
+      end
+
+      it 'increases in quality as sellin approaches: 5 or less days' do
+        items = [Item.new("Backstage passes to a TAFKAL80ETC concert", sell_in=5, quality=20)]
+        GildedRose.new(items).update_quality()
+        expect(items[0].quality).to eq 23
+      end
+
+      it 'loses all quality after its sellin date drops to 0' do
+        items = [Item.new("Backstage passes to a TAFKAL80ETC concert", sell_in=0, quality=20)]
+        GildedRose.new(items).update_quality()
+        expect(items[0].quality).to eq 0
+      end
+    end
+
   end
 end
