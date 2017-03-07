@@ -3,7 +3,6 @@ require 'gilded_rose'
 describe GildedRose do
 
   describe "#update_quality" do
-
     it "does not change the name" do
       items = [Item.new("foo", 0, 0)]
       GildedRose.new(items).update_quality()
@@ -11,7 +10,6 @@ describe GildedRose do
     end
 
     context 'for regular items' do
-
       it "decreases the quality value by 1 when a day goes by" do
         items = [Item.new("Item", 5, 10)]
         GildedRose.new(items).update_quality()
@@ -43,7 +41,6 @@ describe GildedRose do
         GildedRose.new(items).update_quality()
         expect(items[0].quality).to eq 50
       end
-
     end
 
     context 'Aged Brie' do
@@ -59,6 +56,12 @@ describe GildedRose do
         items = [Item.new("Sulfuras, Hand of Ragnaros", sell_in=0, quality=80)]
         GildedRose.new(items).update_quality()
         expect(items[0].quality).to eq 80
+      end
+
+      it 'sell_in never decreases' do
+        items = [Item.new("Sulfuras, Hand of Ragnaros", sell_in=0, quality=80)]
+        GildedRose.new(items).update_quality()
+        expect(items[0].sell_in).to eq 0
       end
     end
 
