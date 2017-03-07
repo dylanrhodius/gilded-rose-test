@@ -32,8 +32,13 @@ describe GildedRose do
         expect(items[0].quality).to eq 6
       end
 
-    end
+      it 'does not decrease the quality of an item below 0 (quality is never negative)' do
+        items = [Item.new("Item", 2, 0)]
+          GildedRose.new(items).update_quality()
+        expect(items[0].quality).to eq 0
+      end
 
+    end
 
   end
 end
