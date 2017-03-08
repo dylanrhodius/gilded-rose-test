@@ -2,6 +2,8 @@ require_relative 'item'
 
 class GildedRose
 
+MAX_QUALITY = 50
+
   def initialize(items)
     @items = items
   end
@@ -18,16 +20,16 @@ class GildedRose
           end
         end
       else
-        if item.quality < 50
+        if item.quality < MAX_QUALITY
           item.quality = item.quality + 1
           if is_concert_ticket?(item)
             if item.sell_in < 11
-              if item.quality < 50
+              if item.quality < MAX_QUALITY
                 item.quality = item.quality + 1
               end
             end
             if item.sell_in < 6
-              if item.quality < 50
+              if item.quality < MAX_QUALITY
                 item.quality = item.quality + 1
               end
             end
@@ -52,7 +54,7 @@ class GildedRose
             item.quality = item.quality - item.quality
           end
         else
-          if item.quality < 50
+          if item.quality < MAX_QUALITY
             item.quality = item.quality + 1
           end
         end
