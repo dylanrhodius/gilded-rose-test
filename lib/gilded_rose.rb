@@ -20,7 +20,7 @@ class GildedRose
       else
         if item.quality < 50
           item.quality = item.quality + 1
-          if item.name == "Backstage passes to a TAFKAL80ETC concert"
+          if is_concert_ticket?(item)
             if item.sell_in < 11
               if item.quality < 50
                 item.quality = item.quality + 1
@@ -34,17 +34,17 @@ class GildedRose
           end
         end
       end
-      if item.name != "Sulfuras, Hand of Ragnaros"
+      if !is_sulfuras?(item)
         item.sell_in = item.sell_in - 1
       end
       if item.sell_in < 0
-      if item.name.include? "Conjured"
+      if is_conjured?(item)
         item.quality -= 2
       end
-        if item.name != "Aged Brie"
-          if item.name != "Backstage passes to a TAFKAL80ETC concert"
+        if !is_aged_brie?(item)
+          if !is_concert_ticket?(item)
             if item.quality > 0
-              if item.name != "Sulfuras, Hand of Ragnaros" && (!item.name.include? "Conjured")
+              if !is_sulfuras?(item) && !is_conjured?(item)
                 item.quality = item.quality - 1
               end
             end
