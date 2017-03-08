@@ -8,12 +8,12 @@ class GildedRose
 
   def update_quality()
     @items.each do |item|
-      if item.name.include? "Conjured"
+      if is_conjured?(item)
         item.quality -= 2
       end
       if !is_aged_brie?(item) and !is_concert_ticket?(item)
         if item.quality > 0
-          if item.name != "Sulfuras, Hand of Ragnaros" && (!item.name.include? "Conjured")
+          if !is_sulfuras?(item) && !is_conjured?(item)
             item.quality = item.quality - 1
           end
         end
@@ -68,6 +68,14 @@ end
 
 def is_concert_ticket?(item)
   item.name.downcase.include? ("concert" || "pass")
+end
+
+def is_conjured?(item)
+  item.name.downcase.include? ("conjured")
+end
+
+def is_sulfuras?(item)
+  item.name == "Sulfuras, Hand of Ragnaros"
 end
 
 
