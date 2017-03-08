@@ -11,7 +11,7 @@ class GildedRose
       if item.name.include? "Conjured"
         item.quality -= 2
       end
-      if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert"
+      if !is_aged_brie?(item) and !is_concert_ticket?(item)
         if item.quality > 0
           if item.name != "Sulfuras, Hand of Ragnaros" && (!item.name.include? "Conjured")
             item.quality = item.quality - 1
@@ -59,4 +59,16 @@ class GildedRose
       end
     end
   end
+
+private
+
+def is_aged_brie?(item)
+  item.name == "Aged Brie"
+end
+
+def is_concert_ticket?(item)
+  item.name.downcase.include? ("concert" || "pass")
+end
+
+
 end
